@@ -15,8 +15,12 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     /**
      * Creates new form InterfacciaTalpa
      */
+    private Buca[] buche = new Buca[4];
+    private Talpa[] talpe = new Talpa[4];
+    
     public InterfacciaTalpa() {
         initComponents();
+        personalizzaInizializzazione();
     }
 
     /**
