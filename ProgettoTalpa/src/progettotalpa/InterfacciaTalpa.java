@@ -22,6 +22,13 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         initComponents();
         personalizzaInizializzazione();
     }
+    
+    private void initComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Acchiappa la Talpa - Progetto Java");
+        setSize(500, 500);
+        getContentPane().setLayout(new GridLayout(2, 2, 10, 10));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
