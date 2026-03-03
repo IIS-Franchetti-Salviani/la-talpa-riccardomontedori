@@ -8,6 +8,11 @@ package progettotalpa;
  *
  * @author montedori.riccardo
  */
-public class Talpa {
-    
+public class Talpa extends Thread {
+    private Buca bucaAssociata;
+    private boolean inEsecuzione = true;
+
+    public Talpa(Buca buca) {
+        this.bucaAssociata = buca;
+    }
 }
