@@ -4,6 +4,8 @@
  */
 package progettotalpa;
 
+import java.awt.GridLayout;
+
 /**
  *
  * @author montedori.riccardo
