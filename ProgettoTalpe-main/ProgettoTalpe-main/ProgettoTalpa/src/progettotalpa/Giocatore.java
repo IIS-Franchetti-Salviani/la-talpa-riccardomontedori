@@ -6,8 +6,8 @@ package progettotalpa;
 
 /**
  *
- * @author montedori.riccardo
+ * @author monte
  */
-public class Gestore {
+public class Giocatore {
     
 }
