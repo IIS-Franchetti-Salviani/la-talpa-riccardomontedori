@@ -11,7 +11,6 @@ package progettotalpa;
 public class Talpa {
     
     private boolean visibile;
-
     public Talpa() {
         this.visibile = false;
     }
