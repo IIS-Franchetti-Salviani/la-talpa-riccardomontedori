@@ -128,7 +128,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(130, 220, 72, 38);
+        jButton1.setBounds(130, 220, 90, 60);
 
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +136,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(250, 150, 72, 39);
+        jButton2.setBounds(250, 150, 100, 60);
 
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(380, 220, 72, 38);
+        jButton3.setBounds(380, 220, 90, 60);
 
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,16 +152,16 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(250, 290, 72, 40);
+        jButton4.setBounds(250, 290, 100, 60);
 
         jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
         jLabel1.setText("ACCHIAPPA LA TALPA");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(150, 20, 320, 60);
+        jLabel1.setBounds(180, 30, 320, 60);
 
         jLabel2.setText("Punteggio:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(400, 330, 70, 16);
+        jLabel2.setBounds(410, 350, 70, 16);
         getContentPane().add(jLabel3);
         jLabel3.setBounds(490, 330, 70, 20);
 
