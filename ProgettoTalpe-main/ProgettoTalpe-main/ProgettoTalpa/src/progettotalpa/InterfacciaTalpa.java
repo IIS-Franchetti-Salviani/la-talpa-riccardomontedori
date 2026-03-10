@@ -43,16 +43,24 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     }
     
     public void aggiornaGraficaTalpa(int indice, boolean visibile) {
-        JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
-        String immagine = visibile ? "talpa.png" : "buca.png";
+    javax.swing.JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
+    String immagine = visibile ? "talpa.png" : "buca.png";
+    
+    // 1. Definisci qui la grandezza fissa (es. 100 pixel)
+    int larghezzaFissa = 75; 
+    int altezzaFissa = 75;
+    
+    // 2. Carica e riscala usando i numeri fissi, non i metodi getWidth/Height
+    javax.swing.ImageIcon icona = new javax.swing.ImageIcon(immagine);
+    java.awt.Image img = icona.getImage().getScaledInstance(larghezzaFissa, altezzaFissa, java.awt.Image.SCALE_SMOOTH);
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        bottoni[indice].setIcon(new javax.swing.ImageIcon(img));
         
-        ImageIcon icona = new ImageIcon(immagine);
-        Image img = icona.getImage().getScaledInstance(bottoni[indice].getWidth(), bottoni[indice].getHeight(), Image.SCALE_SMOOTH);
-        
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            bottoni[indice].setIcon(new ImageIcon(img));
-        });
-    }
+        // 3. Opzionale: impedisce al bottone di cambiare dimensione
+        bottoni[indice].setPreferredSize(new java.awt.Dimension(larghezzaFissa, altezzaFissa));
+    });
+}
     
     private void resetBuche() {
         for(int i=0; i<4; i++) {
@@ -73,63 +81,47 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(130, 220, 72, 38);
 
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(250, 150, 72, 39);
 
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(380, 220, 72, 38);
 
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(250, 290, 72, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(142, 142, 142))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
-        );
+        jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
+        jLabel1.setText("ACCHIAPPA LA TALPA");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(150, 20, 320, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -181,6 +173,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
 }
