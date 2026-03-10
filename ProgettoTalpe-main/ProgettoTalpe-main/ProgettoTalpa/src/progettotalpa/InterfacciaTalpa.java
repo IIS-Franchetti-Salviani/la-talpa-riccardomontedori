@@ -61,13 +61,31 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     });
 }
     private void controllaClick(int indiceBottone) {
-        if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
-            punti += 10;
-        } else {
-            punti -= 5;
-        }
-        jLabel3.setText("" + punti);
+    if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
+        punti += 10;
+    } else {
+        punti -= 5;
     }
+    
+    jLabel2.setText("PUNTI: " + punti);
+
+    // Controllo vittoria
+    if (punti >= 50) {
+        vittoria();
+    }
+}
+    private void vittoria() {
+    gestore.ferma(); // Ferma il ciclo nel thread del Gestore
+    
+    // Mostra un messaggio a video
+    javax.swing.JOptionPane.showMessageDialog(this, "GRANDE! Hai raggiunto 50 punti. Gioco terminato!");
+    
+    // Opzionale: disabilita i bottoni per non far più cliccare
+    jButton1.setEnabled(false);
+    jButton2.setEnabled(false);
+    jButton3.setEnabled(false);
+    jButton4.setEnabled(false);
+}
     
     private void resetBuche() {
         for(int i=0; i<4; i++) {
