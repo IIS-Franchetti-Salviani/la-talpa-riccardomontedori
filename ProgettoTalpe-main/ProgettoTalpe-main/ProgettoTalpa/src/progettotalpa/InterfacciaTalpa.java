@@ -21,7 +21,8 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
      * Creates new form InterfacciaTalpa
      */
      private Gestore gestore;
-     
+     private int punti = 0;
+    private int indiceCorrente = -1;
     public InterfacciaTalpa() {
         initComponents();
         gestore = new Gestore();
@@ -61,6 +62,14 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         bottoni[indice].setPreferredSize(new java.awt.Dimension(larghezzaFissa, altezzaFissa));
     });
 }
+    private void controllaClick(int indiceBottone) {
+        if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
+            punti += 10;
+        } else {
+            punti -= 5;
+        }
+        jLabel3.setText("PUNTI: " + punti);
+    }
     
     private void resetBuche() {
         for(int i=0; i<4; i++) {
@@ -82,6 +91,8 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -123,23 +134,35 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(150, 20, 320, 60);
 
+        jLabel2.setText("Punteggio:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(420, 330, 70, 16);
+
+        jLabel3.setText("0");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(490, 330, 37, 16);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        controllaClick(2);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        controllaClick(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        controllaClick(3);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        controllaClick(1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -174,6 +197,8 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
 }
