@@ -8,10 +8,9 @@ package progettotalpa;
  *
  * @author monte
  */
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import java.awt.Insets;
 
 public class InterfacciaTalpa extends javax.swing.JFrame {
     
@@ -24,21 +23,22 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
      
     public InterfacciaTalpa() {
         initComponents();
+
+        Image img = new ImageIcon("buca.png").getImage();
+        Image imgRiscalata = img.getScaledInstance(jButton1.getWidth(), jButton1.getHeight(), Image.SCALE_SMOOTH);
+        jButton1.setIcon(new ImageIcon(imgRiscalata));
+        Image img2 = new ImageIcon("buca.png").getImage();
+        Image imgRiscalata2 = img2.getScaledInstance(jButton2.getWidth(), jButton2.getHeight(), Image.SCALE_SMOOTH);
+        jButton2.setIcon(new ImageIcon(imgRiscalata2));
+        Image img3 = new ImageIcon("buca.png").getImage();
+        Image imgRiscalata3 = img3.getScaledInstance(jButton3.getWidth(), jButton3.getHeight(), Image.SCALE_SMOOTH);
+        jButton3.setIcon(new ImageIcon(imgRiscalata3));
+        Image img4 = new ImageIcon("buca.png").getImage();
+        Image imgRiscalata4 = img4.getScaledInstance(jButton4.getWidth(), jButton4.getHeight(), Image.SCALE_SMOOTH);
+        jButton4.setIcon(new ImageIcon(imgRiscalata4));
     }
     
-    private void inserisciImmagine() {
 
-    ImageIcon icon = new ImageIcon(getClass().getResource("/progettotalpa/buca.png"));
-    Image img = icon.getImage();
-
-    Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-    ImageIcon scaledIcon = new ImageIcon(scaled);
-
-    jLabel1.setIcon(scaledIcon);
-    jLabel2.setIcon(scaledIcon);
-    jLabel3.setIcon(scaledIcon);
-    jLabel4.setIcon(scaledIcon);
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,50 +48,50 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jButton1.setText("jButton1");
 
-        jLabel2.setText("jLabel2");
+        jButton2.setText("jButton2");
 
-        jLabel3.setText("jLabel3");
+        jButton3.setText("jButton3");
 
-        jLabel4.setText("jLabel4");
+        jButton4.setText("jButton4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(108, 108, 108))
             .addGroup(layout.createSequentialGroup()
-                .addGap(266, 266, 266)
+                .addGap(71, 71, 71)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(142, 142, 142))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1))
-                .addContainerGap(291, Short.MAX_VALUE))
+                    .addComponent(jButton4)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(97, 97, 97))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addGap(63, 63, 63)
+                .addComponent(jButton4)
+                .addGap(93, 93, 93))
         );
 
         pack();
@@ -124,10 +124,10 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 
 }
