@@ -24,7 +24,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
      
     public InterfacciaTalpa() {
         initComponents();
-
+        gestore = new Gestore();
         Image img = new ImageIcon("buca.png").getImage();
         Image imgRiscalata = img.getScaledInstance(jButton1.getWidth(), jButton1.getHeight(), Image.SCALE_SMOOTH);
         jButton1.setIcon(new ImageIcon(imgRiscalata));
@@ -37,6 +37,9 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         Image img4 = new ImageIcon("buca.png").getImage();
         Image imgRiscalata4 = img4.getScaledInstance(jButton4.getWidth(), jButton4.getHeight(), Image.SCALE_SMOOTH);
         jButton4.setIcon(new ImageIcon(imgRiscalata4));
+        
+        resetBuche();
+        gestore.avvia(this);
     }
     
     public void aggiornaGraficaTalpa(int indice, boolean visibile) {

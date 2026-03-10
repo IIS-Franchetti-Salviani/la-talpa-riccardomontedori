@@ -21,7 +21,6 @@ public class Gestore {
         random = new Random();
     }
     
-   // Nel metodo avvia di Gestore.java
 public void avvia(InterfacciaTalpa form) {
     attivo = true;
     threadTalpa = new Thread(() -> {
@@ -31,12 +30,12 @@ public void avvia(InterfacciaTalpa form) {
                 int scelto = random.nextInt(4);
                 
                 talpa.appare();
-                form.aggiornaGraficaTalpa(scelto, true); // Talpa fuori
+                form.aggiornaGraficaTalpa(scelto, true); 
                 
                 Thread.sleep(800);
                 
                 talpa.scompare();
-                form.aggiornaGraficaTalpa(scelto, false); // Torna buca
+                form.aggiornaGraficaTalpa(scelto, false); 
                 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
