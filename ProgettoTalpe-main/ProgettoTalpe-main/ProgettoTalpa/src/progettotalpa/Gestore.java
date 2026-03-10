@@ -21,24 +21,30 @@ public class Gestore {
         random = new Random();
     }
     
-    public void avvia() {
-        attivo = true;
-
-        threadTalpa = new Thread(() -> {
-            while (attivo) {
-                try {
-                    Thread.sleep(1000 + random.nextInt(2000));
-                    talpa.appare();
-                    Thread.sleep(800);
-                    talpa.scompare();
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+   // Nel metodo avvia di Gestore.java
+public void avvia(InterfacciaTalpa form) {
+    attivo = true;
+    threadTalpa = new Thread(() -> {
+        while (attivo) {
+            try {
+                Thread.sleep(1000 + random.nextInt(2000));
+                int scelto = random.nextInt(4);
+                
+                talpa.appare();
+                form.aggiornaGraficaTalpa(scelto, true); // Talpa fuori
+                
+                Thread.sleep(800);
+                
+                talpa.scompare();
+                form.aggiornaGraficaTalpa(scelto, false); // Torna buca
+                
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
-        });
-
-        threadTalpa.start();
-    }
+        }
+    });
+    threadTalpa.start();
+}
 
     public void ferma() {
         attivo = false;
