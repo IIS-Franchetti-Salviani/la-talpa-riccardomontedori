@@ -44,21 +44,19 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     }
     
     public void aggiornaGraficaTalpa(int indice, boolean visibile) {
+    this.indiceCorrente = visibile ? indice : -1; 
+    
     javax.swing.JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
     String immagine = visibile ? "talpa.png" : "buca.png";
     
-    // 1. Definisci qui la grandezza fissa (es. 100 pixel)
     int larghezzaFissa = 75; 
     int altezzaFissa = 75;
     
-    // 2. Carica e riscala usando i numeri fissi, non i metodi getWidth/Height
     javax.swing.ImageIcon icona = new javax.swing.ImageIcon(immagine);
     java.awt.Image img = icona.getImage().getScaledInstance(larghezzaFissa, altezzaFissa, java.awt.Image.SCALE_SMOOTH);
     
     javax.swing.SwingUtilities.invokeLater(() -> {
         bottoni[indice].setIcon(new javax.swing.ImageIcon(img));
-        
-        // 3. Opzionale: impedisce al bottone di cambiare dimensione
         bottoni[indice].setPreferredSize(new java.awt.Dimension(larghezzaFissa, altezzaFissa));
     });
 }
@@ -68,7 +66,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         } else {
             punti -= 5;
         }
-        jLabel3.setText("PUNTI: " + punti);
+        jLabel3.setText("" + punti);
     }
     
     private void resetBuche() {
@@ -136,11 +134,9 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
 
         jLabel2.setText("Punteggio:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(420, 330, 70, 16);
-
-        jLabel3.setText("0");
+        jLabel2.setBounds(400, 330, 70, 16);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 330, 37, 16);
+        jLabel3.setBounds(490, 330, 70, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
