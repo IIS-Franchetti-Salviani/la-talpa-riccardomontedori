@@ -23,6 +23,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
      private Gestore gestore;
      private int punti = 0;
     private int indiceCorrente = -1;
+    private boolean talpaGiaColpita = false;
     public InterfacciaTalpa() {
         initComponents();
         gestore = new Gestore();
@@ -45,7 +46,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     
     public void aggiornaGraficaTalpa(int indice, boolean visibile) {
     this.indiceCorrente = visibile ? indice : -1; 
-    
+    this.talpaGiaColpita = false;
     javax.swing.JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
     String immagine = visibile ? "talpa.png" : "buca.png";
     
@@ -61,15 +62,23 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     });
 }
     private void controllaClick(int indiceBottone) {
+    // Se la talpa è già stata colpita per questo turno, esci dal metodo
+    if (talpaGiaColpita) {
+        return; 
+    }
+
     if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
         punti += 10;
+        talpaGiaColpita = true; // Segna che la talpa è stata presa!
+        
+        // Opzionale: fai sparire la talpa immediatamente dopo il colpo
+        // ((javax.swing.JButton)getContentPane().getComponentAt(0,0)).setIcon(new ImageIcon("buca.png")); 
     } else {
         punti -= 5;
     }
     
     jLabel2.setText("PUNTI: " + punti);
 
-    // Controllo vittoria
     if (punti >= 50) {
         vittoria();
     }
