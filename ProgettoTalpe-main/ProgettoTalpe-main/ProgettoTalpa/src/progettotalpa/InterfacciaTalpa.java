@@ -68,27 +68,28 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     }
 
     private void controllaClick(int indiceBottone) {
-        // Se la talpa è già stata colpita per questo turno, esci dal metodo
-        if (talpaGiaColpita) {
-            return;
-        }
-
-        if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
-            punti += 10;
-            talpaGiaColpita = true; // Segna che la talpa è stata presa!
-
-            // Opzionale: fai sparire la talpa immediatamente dopo il colpo
-            // ((javax.swing.JButton)getContentPane().getComponentAt(0,0)).setIcon(new ImageIcon("buca.png")); 
-        } else {
-            punti -= 5;
-        }
-
-        jLabel2.setText("PUNTI: " + punti);
-
-        if (punti >= 50) {
-            vittoria();
-        }
+    if (talpaGiaColpita) {
+        return; 
     }
+
+    if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
+        punti += 10;
+        talpaGiaColpita = true; 
+    } else {
+        punti -= 5;
+    }
+
+    // Impedisce ai punti di diventare negativi
+    if (punti < 0) {
+        punti = 0;
+    }
+    
+    jLabel2.setText("PUNTI: " + punti);
+
+    if (punti >= 50) {
+        vittoria();
+    }
+}
 
     private void vittoria() {
         gestore.ferma(); // Ferma il ciclo nel thread del Gestore
