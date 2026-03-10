@@ -14,19 +14,24 @@ import java.awt.Insets;
 import javax.swing.JButton;
 
 public class InterfacciaTalpa extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InterfacciaTalpa.class.getName());
 
     /**
      * Creates new form InterfacciaTalpa
      */
-     private Gestore gestore;
-     private int punti = 0;
+    private Gestore gestore;
+    private int punti = 0;
     private int indiceCorrente = -1;
     private boolean talpaGiaColpita = false;
+
     public InterfacciaTalpa() {
         initComponents();
         gestore = new Gestore();
+        ImageIcon iconaLabe = new ImageIcon("bosco.jpg");
+        Image imgLabel = iconaLabe.getImage();
+        Image imgLabelRiscalata = imgLabel.getScaledInstance(jLabel4.getWidth(), jLabel4.getHeight(), Image.SCALE_SMOOTH);
+        jLabel4.setIcon(new ImageIcon(imgLabelRiscalata));
         Image img = new ImageIcon("buca.png").getImage();
         Image imgRiscalata = img.getScaledInstance(jButton1.getWidth(), jButton1.getHeight(), Image.SCALE_SMOOTH);
         jButton1.setIcon(new ImageIcon(imgRiscalata));
@@ -39,65 +44,67 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         Image img4 = new ImageIcon("buca.png").getImage();
         Image imgRiscalata4 = img4.getScaledInstance(jButton4.getWidth(), jButton4.getHeight(), Image.SCALE_SMOOTH);
         jButton4.setIcon(new ImageIcon(imgRiscalata4));
-        
+
         resetBuche();
         gestore.avvia(this);
     }
-    
+
     public void aggiornaGraficaTalpa(int indice, boolean visibile) {
-    this.indiceCorrente = visibile ? indice : -1; 
-    this.talpaGiaColpita = false;
-    javax.swing.JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
-    String immagine = visibile ? "talpa.png" : "buca.png";
-    
-    int larghezzaFissa = 75; 
-    int altezzaFissa = 75;
-    
-    javax.swing.ImageIcon icona = new javax.swing.ImageIcon(immagine);
-    java.awt.Image img = icona.getImage().getScaledInstance(larghezzaFissa, altezzaFissa, java.awt.Image.SCALE_SMOOTH);
-    
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        bottoni[indice].setIcon(new javax.swing.ImageIcon(img));
-        bottoni[indice].setPreferredSize(new java.awt.Dimension(larghezzaFissa, altezzaFissa));
-    });
-}
+        this.indiceCorrente = visibile ? indice : -1;
+        this.talpaGiaColpita = false;
+        javax.swing.JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
+        String immagine = visibile ? "talpa.png" : "buca.png";
+
+        int larghezzaFissa = 75;
+        int altezzaFissa = 75;
+
+        javax.swing.ImageIcon icona = new javax.swing.ImageIcon(immagine);
+        java.awt.Image img = icona.getImage().getScaledInstance(larghezzaFissa, altezzaFissa, java.awt.Image.SCALE_SMOOTH);
+
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            bottoni[indice].setIcon(new javax.swing.ImageIcon(img));
+            bottoni[indice].setPreferredSize(new java.awt.Dimension(larghezzaFissa, altezzaFissa));
+        });
+    }
+
     private void controllaClick(int indiceBottone) {
-    // Se la talpa è già stata colpita per questo turno, esci dal metodo
-    if (talpaGiaColpita) {
-        return; 
+        // Se la talpa è già stata colpita per questo turno, esci dal metodo
+        if (talpaGiaColpita) {
+            return;
+        }
+
+        if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
+            punti += 10;
+            talpaGiaColpita = true; // Segna che la talpa è stata presa!
+
+            // Opzionale: fai sparire la talpa immediatamente dopo il colpo
+            // ((javax.swing.JButton)getContentPane().getComponentAt(0,0)).setIcon(new ImageIcon("buca.png")); 
+        } else {
+            punti -= 5;
+        }
+
+        jLabel2.setText("PUNTI: " + punti);
+
+        if (punti >= 50) {
+            vittoria();
+        }
     }
 
-    if (indiceBottone == indiceCorrente && gestore.getTalpa().isVisibile()) {
-        punti += 10;
-        talpaGiaColpita = true; // Segna che la talpa è stata presa!
-        
-        // Opzionale: fai sparire la talpa immediatamente dopo il colpo
-        // ((javax.swing.JButton)getContentPane().getComponentAt(0,0)).setIcon(new ImageIcon("buca.png")); 
-    } else {
-        punti -= 5;
-    }
-    
-    jLabel2.setText("PUNTI: " + punti);
-
-    if (punti >= 50) {
-        vittoria();
-    }
-}
     private void vittoria() {
-    gestore.ferma(); // Ferma il ciclo nel thread del Gestore
-    
-    // Mostra un messaggio a video
-    javax.swing.JOptionPane.showMessageDialog(this, "GRANDE! Hai raggiunto 50 punti. Gioco terminato!");
-    
-    // Opzionale: disabilita i bottoni per non far più cliccare
-    jButton1.setEnabled(false);
-    jButton2.setEnabled(false);
-    jButton3.setEnabled(false);
-    jButton4.setEnabled(false);
-}
-    
+        gestore.ferma(); // Ferma il ciclo nel thread del Gestore
+
+        // Mostra un messaggio a video
+        javax.swing.JOptionPane.showMessageDialog(this, "GRANDE! Hai raggiunto 50 punti. Gioco terminato!");
+
+        // Opzionale: disabilita i bottoni per non far più cliccare
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+    }
+
     private void resetBuche() {
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             aggiornaGraficaTalpa(i, false);
         }
     }
@@ -118,52 +125,49 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(130, 220, 90, 60);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 60));
 
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(250, 150, 100, 60);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 100, 60));
 
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(380, 220, 90, 60);
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 90, 60));
 
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(250, 290, 100, 60);
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 100, 60));
 
         jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
         jLabel1.setText("ACCHIAPPA LA TALPA");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(180, 30, 320, 60);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 320, 60));
 
         jLabel2.setText("Punteggio:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(410, 350, 70, 16);
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 330, 70, 20);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 70, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 70, 20));
+
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,26 +196,26 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-        logger.log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(() -> new InterfacciaTalpa().setVisible(true));
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new InterfacciaTalpa().setVisible(true));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,6 +226,7 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
 }
