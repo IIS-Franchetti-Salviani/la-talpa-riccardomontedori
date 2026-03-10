@@ -11,6 +11,7 @@ package progettotalpa;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.Insets;
+import javax.swing.JButton;
 
 public class InterfacciaTalpa extends javax.swing.JFrame {
     
@@ -38,6 +39,23 @@ public class InterfacciaTalpa extends javax.swing.JFrame {
         jButton4.setIcon(new ImageIcon(imgRiscalata4));
     }
     
+    public void aggiornaGraficaTalpa(int indice, boolean visibile) {
+        JButton[] bottoni = {jButton1, jButton2, jButton3, jButton4};
+        String immagine = visibile ? "talpa.png" : "buca.png";
+        
+        ImageIcon icona = new ImageIcon(immagine);
+        Image img = icona.getImage().getScaledInstance(bottoni[indice].getWidth(), bottoni[indice].getHeight(), Image.SCALE_SMOOTH);
+        
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            bottoni[indice].setIcon(new ImageIcon(img));
+        });
+    }
+    
+    private void resetBuche() {
+        for(int i=0; i<4; i++) {
+            aggiornaGraficaTalpa(i, false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
